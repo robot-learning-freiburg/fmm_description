@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<robot name="widowx_turret" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:include filename="$(find fmm_description)/urdf/widowx_turret/widowx_turret.urdf.xacro"/>
+	
+	<link name="ridgeback_ewellix_lift_top_link">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.001 0.001 0.001" />
+			</geometry>
+		</visual>
+	</link>
+	<xacro:widowx_turret parent="ridgeback_ewellix_lift_top_link" prefix="">
+		<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+	</xacro:widowx_turret>
+</robot>

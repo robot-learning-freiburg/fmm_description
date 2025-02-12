@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot name="ridgeback" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+
+
+  <!-- Ridgeback -->
+  <xacro:include filename="$(find fmm_description)/urdf/ridgeback_macro.urdf.xacro" />
+  <xacro:ridgeback />
+
+
+  
+  <!-- Ewellix Lift -->
+  <xacro:include filename="$(find fmm_description)/urdf/ewellix_tlt/ewellix_lift_500mm.urdf.xacro" />
+  <xacro:ewellix_lift_500mm prefix="" parent ="top_link" cut_model = "false" >
+      <origin xyz="0.15 0 0.28" rpy="0 0 0"/>
+  </xacro:ewellix_lift_500mm>
+
+
+  <!-- Widow-X Turret -->
+  <xacro:include filename="$(find fmm_description)/urdf/widowx_turret/widowx_turret_robot.urdf.xacro" />
+  <xacro:widowx_turret parent ="ewellix_lift_top_link"  prefix="" >
+      <origin xyz="0.0126 0.001 0.461" rpy="0 0 -${M_PI/2}"/>
+  </xacro:widowx_turret>
+
+  <!-- Panda Arm -->
+
+  <xacro:arg name="arm_id" default="panda" />
+  <xacro:arg name="hand"   default="true" />
+  <xacro:arg name="gazebo" default="true" />
+
+  <xacro:include filename="$(find franka_description)/robots/panda_arm_macro.xacro" />  
+  <xacro:panda_arm_complete arm_id="$(arg arm_id)" hand="$(arg hand)" gazebo="$(arg gazebo)" />
+
+  <joint name="lift_arm_joint" type="fixed">
+    <origin xyz="0.276 0 -0.415" rpy="0 0 0"/>
+    <parent link="ewellix_lift_top_link" />
+    <child  link="$(arg arm_id)_link0" />
+  </joint>
+
+  <!-- Realsense -->
+  <xacro:include filename="$(find fmm_description)/urdf/_d415.urdf.xacro" />
+  <xacro:sensor_d415 name="camera" topics_ns="camera" parent="top_plate_link" publish_pointcloud="true">
+     <origin xyz="0 0 0" rpy="0 0 ${M_PI/2}"/>
+  </xacro:sensor_d415>
+
+
+</robot>
