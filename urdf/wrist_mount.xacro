@@ -12,7 +12,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://fmm/meshes/Panda_RealSenseD435_Camera_Mount.stl" scale="0.001 0.001 0.001"/>
+          <mesh filename="package://fmm_description/meshes/Panda_RealSenseD435_Camera_Mount.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <material name="gray">
           <color rgba="0.9 0.9 0.9 1"/>
