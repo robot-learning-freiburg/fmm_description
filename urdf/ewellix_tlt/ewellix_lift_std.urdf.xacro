@@ -8,7 +8,7 @@
     <xacro:arg name="ewellix_lift_model" default="lift_500mm" />
     <xacro:property name="lift_selector" default="$(arg ewellix_lift_model)" />
 
-    <xacro:include filename="$(find fmm_description)/urdf/ewelilix_tlt/ewellix_$(arg ewellix_lift_model).urdf.xacro" />
+    <xacro:include filename="$(find fmm_description)/urdf/ewellix_tlt/ewellix_$(arg ewellix_lift_model).urdf.xacro" />
 
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
