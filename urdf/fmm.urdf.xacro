@@ -25,7 +25,7 @@
   </xacro:widowx_turret>
 
   <!-- Panda Arm -->
-  <xacro:arg name="arm_id" default="panda" />
+  <xacro:arg name="arm_id" default="ur5_" />
   
   <xacro:if  value="${'$(arg ros_distro)' == 'melodic'}">
     <xacro:include filename="$(find franka_description)/robots/panda_arm.xacro" />
@@ -37,65 +37,24 @@
     <xacro:wrist_mount rpy="0 0 0" connected_to="$(arg arm_id)_hand" xyz="-0.063 -0.03 0"/>
   </xacro:if>
   <xacro:if  value="${'$(arg ros_distro)' == 'noetic'}">
-    <xacro:include filename="$(find franka_description)/robots/common/franka_arm.xacro"/>
-    <xacro:include filename="$(find franka_description)/robots/common/franka_hand.xacro"/>
+    <xacro:include filename="$(find fmm_description)/urdf/ur5_arm/ur5.urdf.xacro"/>    
+    <xacro:include filename="$(find fmm_description)/urdf/ur5_arm/robotiq_85_gripper.urdf.xacro"/>
     <xacro:include filename="$(find fmm_description)/urdf/wrist_mount.xacro"/>
-    <xacro:franka_arm arm_id="$(arg arm_id)"
-                      joint_limits="${xacro.load_yaml('$(find franka_description)/robots/panda/joint_limits.yaml')}"
-                      connected_to ="ewellix_lift_top_link" xyz="0.276 0 -0.415" rpy="0 0 0"/>
-
-    <xacro:franka_hand arm_id="$(arg arm_id)" rpy="0 0 ${-M_PI/4}" connected_to="$(arg arm_id)_link8" safety_distance="0.03"/>
-    <xacro:wrist_mount rpy="0 0 0" connected_to="$(arg arm_id)_hand" xyz="-0.063 -0.03 0"/>
+      <xacro:ur5_robot prefix="$(arg arm_id)" joint_limited="true" connected_to ="ewellix_lift_top_link" xyz="0.276 0 -0.415" rpy="0 0 0">
+        <!-- <origin xyz="0.276 0 -0.415" rpy="0 0 0" /> -->
+      </xacro:ur5_robot>
+    <!-- <xacro:robotiq_85_gripper prefix="$(arg arm_id)" rpy="0 0 ${-M_PI/4}" parent="$(arg arm_id)_ee_link" /> -->
+    <xacro:robotiq_85_gripper prefix="$(arg arm_id)"  parent="$(arg arm_id)ee_link" >
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <!-- <origin xyz="0.015 0 0.015" rpy="0 -${M_PI/4} 0"/> -->
+      <!-- <origin xyz="0.03 0 0.03" rpy="0 -${M_PI/2} 0"/> -->
+    </xacro:robotiq_85_gripper>
+    <!-- <xacro:wrist_mount rpy="0 0 0" connected_to="$(arg arm_id)_hand" xyz="-0.063 -0.03 0"/> -->
   </xacro:if>
 
   <!-- Googly Eyes -->
-  <link name="eyes_link">
-    <visual>
-      <origin xyz="0 0.025 0.0005" rpy="0 0 0" />
-      <geometry>
-          <cylinder radius="0.0175" length="0.001"/>
-      </geometry>
-      <xacro:material_white />
-    </visual>
-    <visual>
-      <origin xyz="-0.0045 0.023 0.001" rpy="0 0 0" />
-      <geometry>
-          <cylinder radius="0.012" length="0.002"/>
-      </geometry>
-      <xacro:material_black />
-    </visual>
-    <visual>
-      <origin xyz="0 -0.025 0.0005" rpy="0 0 0" />
-      <geometry>
-          <cylinder radius="0.0175" length="0.001"/>
-      </geometry>
-      <xacro:material_white />
-    </visual>
-    <visual>
-      <origin xyz="-0.0045 -0.023 0.001" rpy="0 0 0" />
-      <geometry>
-          <cylinder radius="0.012" length="0.002"/>
-      </geometry>
-      <xacro:material_black />
-    </visual>
-  </link>
-
-  <joint name="eyes_joint" type="fixed">
-         <!--origin xyz="0.04825 0 0.14203" rpy="0 0 0" /-->
-    <origin xyz="0.0175 0 0.04" rpy="0 1.57 0" />
-    <parent link="$(arg arm_id)_hand" />
-    <child link="eyes_link" />
-  </joint>
 
   <!-- Realsense -->
-  <xacro:include filename="$(find fmm_description)/urdf/_d415.urdf.xacro" />
-  <xacro:sensor_d415 name="camera_tower" topics_ns="camera_tower" parent="top_plate_link" publish_pointcloud="true">
-     <origin xyz="0 0 0" rpy="0 0 ${M_PI/2}"/>
-  </xacro:sensor_d415>
-  
-  <xacro:include filename="$(find fmm_description)/urdf/_d435.urdf.xacro" />
-  <xacro:sensor_d435 name="camera_wrist" topics_ns="camera_wrist" parent="wrist_mount_link" publish_pointcloud="true">
-     <origin xyz="0.0013 0.03 0.05" rpy="${M_PI} ${-M_PI/2} 0"/>
-  </xacro:sensor_d435>
+
   
 </robot>

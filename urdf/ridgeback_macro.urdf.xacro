@@ -313,7 +313,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://fmm/meshes/top_plate_ridgeback.stl"  scale="0.001 0.001 0.001"/>
+          <mesh filename="package://fmm_description/meshes/top_plate_ridgeback.stl"  scale="0.001 0.001 0.001"/>
         </geometry>
         <xacro:material_black />
       </visual>
@@ -321,7 +321,7 @@
       <collision>
         <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://fmm/meshes/top_plate_ridgeback.stl"  scale="0.001 0.001 0.001"/>
+          <mesh filename="package://fmm_description/meshes/top_plate_ridgeback.stl"  scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
     </link>
@@ -339,7 +339,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://fmm/meshes/frankaController.stl"  scale="0.001 0.001 0.001"/>
+          <mesh filename="package://fmm_description/meshes/frankaController.stl"  scale="0.001 0.001 0.001"/>
         </geometry>
         <xacro:material_black />
       </visual>
@@ -347,7 +347,7 @@
       <collision>
         <origin xyz="0.0 0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://fmm/meshes/frankaController.stl"  scale="0.001 0.001 0.001"/>
+          <mesh filename="package://fmm_description/meshes/frankaController.stl"  scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
     </link>
