@@ -24,9 +24,7 @@
       <origin xyz="0.0126 0.001 0.505" rpy="0 0 -${M_PI/2}"/>
   </xacro:widowx_turret>
 
-  <!-- Panda Arm -->
-  <xacro:arg name="arm_id" default="ur5" />
-  
+  <xacro:arg name="arm_id" default="ur5_" />
   <xacro:if  value="${'$(arg ros_distro)' == 'melodic'}">
     <xacro:include filename="$(find franka_description)/robots/panda_arm.xacro" />
     <xacro:include filename="$(find franka_description)/robots/hand.xacro"/>
@@ -36,13 +34,13 @@
     <xacro:hand ns="$(arg arm_id)" rpy="0 0 ${-M_PI/4}" connected_to="$(arg arm_id)_link8" safety_distance="0.03"/>
     <xacro:wrist_mount rpy="0 0 0" connected_to="$(arg arm_id)_hand" xyz="-0.063 -0.03 0"/>
   </xacro:if>
-  <xacro:if  value="${'$(arg ros_distro)' == 'noetic'}">       
+  <xacro:if  value="${'$(arg ros_distro)' == 'noetic'}">
     <xacro:include filename="$(find fmm_description)/urdf/ur5_arm/ur5.urdf.xacro"/>    
     <xacro:include filename="$(find fmm_description)/urdf/ur5_arm/robotiq_85_gripper.urdf.xacro"/>
     <xacro:include filename="$(find fmm_description)/urdf/wrist_mount.xacro"/>
-<xacro:ur5_robot prefix="$(arg arm_id)" joint_limited="true" connected_to ="ewellix_lift_top_link" xyz="0.276 0 -0.415" rpy="0 0 0">
+    <xacro:ur5_robot prefix="$(arg arm_id)" joint_limited="true" connected_to ="ewellix_lift_top_link" xyz="0.276 0 -0.415" rpy="0 0 0">
         <!-- <origin xyz="0.276 0 -0.415" rpy="0 0 0" /> -->
-      </xacro:ur5_robot>
+    </xacro:ur5_robot>
     <!-- <xacro:robotiq_85_gripper prefix="$(arg arm_id)" rpy="0 0 ${-M_PI/4}" parent="$(arg arm_id)_ee_link" /> -->
     <xacro:robotiq_85_gripper prefix="$(arg arm_id)"  parent="$(arg arm_id)ee_link" >
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -53,17 +51,8 @@
   </xacro:if>
 
   <!-- Googly Eyes -->
-  
 
   <!-- Realsense -->
-  <xacro:include filename="$(find fmm_description)/urdf/_d415.urdf.xacro" />
-  <xacro:sensor_d415 name="camera_tower" topics_ns="camera_tower" parent="top_plate_link" publish_pointcloud="true">
-     <origin xyz="0 0 0" rpy="0 0 ${M_PI/2}"/>
-  </xacro:sensor_d415>
-  
-  <xacro:include filename="$(find fmm_description)/urdf/_d435.urdf.xacro" />
-  <xacro:sensor_d435 name="camera_wrist" topics_ns="camera_wrist" parent="wrist_mount_link" publish_pointcloud="true">
-     <origin xyz="0.0013 0.03 0.05" rpy="${M_PI} ${-M_PI/2} 0"/>
-  </xacro:sensor_d435>
+
   
 </robot>

@@ -1,11 +1,26 @@
-<xacro:ur5_robot prefix="$(arg arm_id)" joint_limited="true" connected_to ="ewellix_lift_top_link" xyz="0.276 0 -0.415" rpy="0 0 0">
-        <!-- <origin xyz="0.276 0 -0.415" rpy="0 0 0" /> -->
-      </xacro:ur5_robot>
-    <!-- <xacro:robotiq_85_gripper prefix="$(arg arm_id)" rpy="0 0 ${-M_PI/4}" parent="$(arg arm_id)_ee_link" /> -->
-    <xacro:robotiq_85_gripper prefix="$(arg arm_id)"  parent="$(arg arm_id)ee_link" >
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <!-- <origin xyz="0.015 0 0.015" rpy="0 -${M_PI/4} 0"/> -->
-      <!-- <origin xyz="0.03 0 0.03" rpy="0 -${M_PI/2} 0"/> -->
-    </xacro:robotiq_85_gripper>
-    <!-- <xacro:wrist_mount rpy="0 0 0" connected_to="$(arg arm_id)_hand" xyz="-0.063 -0.03 0"/> -->
-  </xacro:if>
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <gazebo>
+    <plugin name="ros_control" filename="libgazebo_ros_control.so">
+      <!--robotNamespace>/</robotNamespace-->
+      <!--robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType-->
+    </plugin>
+
+<!--
+    <plugin name="gazebo_ros_power_monitor_controller" filename="libgazebo_ros_power_monitor.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>1.0</updateRate>
+      <timeout>5</timeout>
+      <powerStateTopic>power_state</powerStateTopic>
+      <powerStateRate>10.0</powerStateRate>
+      <fullChargeCapacity>87.78</fullChargeCapacity>     
+      <dischargeRate>-474</dischargeRate>
+      <chargeRate>525</chargeRate>
+      <dischargeVoltage>15.52</dischargeVoltage>
+      <chargeVoltage>16.41</chargeVoltage>
+    </plugin>
+-->
+  </gazebo>
+
+</robot>
