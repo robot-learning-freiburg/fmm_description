@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-	<xacro:include filename="$(find fmm_description)/urdf/ewelilix_tlt/common_colours.xacro"/>
+	<xacro:include filename="$(find fmm_description)/urdf/ewellix_tlt/common_colours.xacro"/>
 
 	<xacro:macro name="material_yellow">
 		<material name="">
