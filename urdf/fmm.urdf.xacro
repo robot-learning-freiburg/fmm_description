@@ -35,24 +35,15 @@
     <xacro:wrist_mount rpy="0 0 0" connected_to="$(arg arm_id)_hand" xyz="-0.063 -0.03 0"/>
   </xacro:if>
   <xacro:if  value="${'$(arg ros_distro)' == 'noetic'}">
-    <xacro:include filename="$(find fmm_description)/urdf/ur5_arm/ur5.urdf.xacro"/>    
-    <xacro:include filename="$(find fmm_description)/urdf/ur5_arm/robotiq_85_gripper.urdf.xacro"/>
-    <xacro:include filename="$(find fmm_description)/urdf/wrist_mount.xacro"/>
-    <xacro:ur5_robot prefix="$(arg arm_id)" joint_limited="true" connected_to ="ewellix_lift_top_link" xyz="0.276 0 -0.415" rpy="0 0 0">
-        <!-- <origin xyz="0.276 0 -0.415" rpy="0 0 0" /> -->
-    </xacro:ur5_robot>
-    <!-- <xacro:robotiq_85_gripper prefix="$(arg arm_id)" rpy="0 0 ${-M_PI/4}" parent="$(arg arm_id)_ee_link" /> -->
+    <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro"/>    
+    <xacro:include filename="$(find robotiq_85_description)/urdf/robotiq_85_gripper.urdf.xacro"/>
+    <xacro:ur5_robot prefix="$(arg arm_id)" joint_limited="true" connected_to ="ewellix_lift_top_link" xyz="0.276 0 -0.415" rpy="0 0 0"/>
     <xacro:robotiq_85_gripper prefix="$(arg arm_id)"  parent="$(arg arm_id)ee_link" >
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <!-- <origin xyz="0.015 0 0.015" rpy="0 -${M_PI/4} 0"/> -->
-      <!-- <origin xyz="0.03 0 0.03" rpy="0 -${M_PI/2} 0"/> -->
     </xacro:robotiq_85_gripper>
-    <!-- <xacro:wrist_mount rpy="0 0 0" connected_to="$(arg arm_id)_hand" xyz="-0.063 -0.03 0"/> -->
   </xacro:if>
 
   <!-- Googly Eyes -->
 
   <!-- Realsense -->
-
-  
 </robot>
